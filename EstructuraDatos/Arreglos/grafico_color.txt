@@ -1,0 +1,114 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class Grafica extends JFrame{
+
+    JCheckBox chk1, chk2;
+    JRadioButton rbtn1, rbtn2;
+    JScrollPane scroll; //barra de desplazamiento
+    JList lst1; //este no vive solo necesita un arreglo
+    JLabel lb1;
+    JTextField txt1;
+    JButton btn1, btn2;
+    JTextArea txtA1;
+    Container pantalla;
+    int arreglo[]=new int [10];
+    int cont=0;
+    String colores[]= {"Amarillo", "Rojo", "Blanco", "Negro", "Violeta", "Celeste", "Naranja", "Verde", "Cafe"};
+
+    GridLayout grid=new GridLayout(3,2);
+
+    Grafica(){ //esto le da vida a la pantalla
+        setTitle("Manejo de Vectores");
+
+        pantalla=getContentPane();
+
+        pantalla.setLayout(grid);
+
+        lb1 = new JLabel("Dato"); //esto es un objeto
+        txt1 = new JTextField(10);
+
+        txtA1 = new JTextArea();
+        txtA1.setBackground(Color.BLUE); //el fondo del txtA1
+        txtA1.setForeground(Color.WHITE); // la letra será blanca del txtA1
+        txtA1.setFont(new Font("Courier",Font.BOLD,15)); // se cambia el tipo de letra
+        //new invoca a un constructor de la clase Font con todos sus argumentos
+        rbtn1= new JRadioButton("Radio 1",false);
+        rbtn2= new JRadioButton("Radio 2",true);
+        lst1=new JList(colores);
+        scroll=new JScrollPane(lst1); //el list irá dentro del scroll y estos objetos casi siempre van juntos
+        btn1 = new JButton("Ingresa Dato");
+        btn2= new JButton("Grafica");
+        chk1=new JCheckBox("Caja 1",true);
+        chk2=new JCheckBox("Caja 2",true);
+
+        btn1.addActionListener(new Eventos());
+        btn2.addActionListener(new Eventos());
+
+        pantalla.add(lb1); pantalla.add(txt1); //esto ya le agrega la vida a los botones
+        pantalla.add(btn1); pantalla.add(btn2);
+        
+        pantalla.add(txtA1); 
+        pantalla.add(scroll);
+        pantalla.add(rbtn1); pantalla.add(rbtn2);
+        pantalla.add(chk1); pantalla.add(chk2);
+        setSize(400,400);
+        setVisible(true);
+
+    }
+
+    public class Eventos implements ActionListener{ //le da vida a los botones, qué se hará
+
+        public void actionPerformed(ActionEvent e){
+
+
+            if(e.getSource()==btn1){//mete datos
+                MeteDatos();
+              }
+            else if(e.getSource()==btn2){
+                Imprimir();
+            }
+          }
+
+    }
+
+
+public void MeteDatos(){//método
+
+    try{
+
+    arreglo[cont]=Integer.parseInt(txt1.getText());
+    //se convierte el texto a binario y se introduce el numero al arreglo
+    cont++; txt1.setText(""); //se limpia lo que se escribió
+    txt1.requestFocus();
+
+    }catch(Exception error){
+        //el error que marcara ya no se mostrará en la consola sino en la pantalla
+        JOptionPane.showMessageDialog(null,"Ocurrio un error"+error.toString());
+
+
+    }
+}
+
+public void Imprimir(){
+
+    String r="Forma\n\n";
+    int d;
+
+    for (int i=0; i<cont; i++){   //for (int j=0; j<=cont; j++){
+       d=arreglo[i];
+       r=r+d+"\t"; //se concatenaron caracteres
+       for (int j=1; j<=d; j++){
+           r=r+"*";
+       }
+        r=r+"\n";
+
+        }
+    //r=r+"\n";
+    txtA1.setText(r); //con esto imprime en el textarea
+    }
+
+
+}

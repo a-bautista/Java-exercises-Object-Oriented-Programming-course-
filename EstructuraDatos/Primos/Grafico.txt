@@ -1,0 +1,67 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package primos;
+
+/**
+ *
+ * @author luis.vega
+ */
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+
+public class TestMain extends JFrame{ //soporta toda la parte grafica lo hereda
+
+    
+    JLabel lb1, lb2; //vienen de Jframe
+    
+    JTextField txt1, txt2;  //por protocolo vienen lb1 de label y txt1 de texto
+    
+    JButton btn1;  //se crearon primero lo que necesitas
+    
+    Container pantalla;
+    
+    //las plantillas hacen que se metan los obj
+    
+    FlowLayout layout=new FlowLayout();  // FlowLayout() es el metodo que se llama el constructor  y FlowLayout es la clase
+    
+    TestMain(){  //va a modificar la clase TestMain
+        
+        pantalla= getContentPane(); 
+        pantalla.setLayout(layout); //inicializa la pantalla 
+        
+        setTitle("Ejemplo de numeros Primos");
+        
+        lb1=new JLabel("No. "); //este es otro constructor que lleva un texto
+        
+        txt1=new JTextField(10); //10 son los numeros de caracteres
+        
+        txt2=new JTextField(40);
+        
+        lb2= new JLabel("Resultado");
+        
+        btn1= new JButton("ES primo?");
+        
+        pantalla.add(lb1); pantalla.add(txt1);// todo esto echa a andar todo el codigo
+        
+        pantalla.add(lb2); pantalla.add(txt2); pantalla.add(btn1); //no marca error porque todo va seguido de ;
+        
+        setSize(300,300); //esto es el tamaño de las pantalla que va a aparecer
+        
+        setVisible(true);  //hace que se muestre todo
+        
+    }
+        
+        public static void main (String args[]){
+            
+            TestMain p=new TestMain();
+            
+        }
+}
+        
+ 

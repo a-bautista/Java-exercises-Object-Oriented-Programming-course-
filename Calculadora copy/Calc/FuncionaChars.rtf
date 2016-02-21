@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 public class ParteResuelve \{\
+    \
+        Stack<String> operations = new Stack<String>();\
+        Stack<Double> values = new Stack<Double>();\
+        \
+    public void getDisplay(String display)\{\
+            \
+        char[] separa = display.toCharArray();\
+        \
+        for (int i = 0; i < display.length(); i++) \{\
+            separa[i]=display.charAt(i);\
+            System.out.println("esto es:"+separa[i]);\
+        \}\
+        //((9+2)*((9*8)+1))\
+        //(((9+2)*(9*8))+1) funcionan \
+        //((8+9)+((8*9)+1))\
+        //((7/7)-((1+1)*(2+1)))\
+        \
+        for (int i = 0; i < separa.length; i++) \{\
+            char s= separa[i];\
+            if (s=='(') \{\
+                //nada\
+            \}\
+            else if(s=='+')\{\
+                operations.push(""+s);\
+            \}\
+            else if(s=='*')\{\
+                operations.push(""+s);\
+            \}\
+            else if(s=='-')\{\
+                operations.push(""+s);\
+            \}else if(s=='/')\{\
+                operations.push(""+s);\
+            \}\
+            else if(s==')')\{\
+                String op = operations.pop();\
+                double v=values.pop();//nuevo\
+                \
+                if (op.equals("+")) \{\
+                    values.push(values.pop()+v);\
+                \}\
+                else if(op.equals("*"))\{\
+                    values.push(values.pop()*v);\
+                \}\
+                else if(op.equals("-"))\{\
+                    values.push(values.pop()-v);\
+                \}\
+                else if(op.equals("/"))\{\
+                    values.push(values.pop()/v);\
+                \}\
+            \}else\{\
+                values.push(Double.parseDouble(""+s));\
+            \}\
+            \
+                \
+            \
+        \}\
+        System.out.println(values.pop());\
+     \}\
+\}}
