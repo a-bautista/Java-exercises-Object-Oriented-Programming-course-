@@ -1,12 +1,15 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MessageApp {
 
-    public String getTextFromFile() {
+    public List getTextFromFile() {
 
         FileReader reader = null;
         BufferedReader bReader = null;
-        String allText = "";
+        List<String> quote = new ArrayList<>();
 
         try {
 
@@ -14,10 +17,10 @@ public class MessageApp {
             bReader = new BufferedReader(reader);
             String line;
 
-            while((line = bReader.readLine())!=null){
-                allText += line + "\n";
-            }
-            return allText;
+            while((line = bReader.readLine())!=null)
+                quote.add(line);
+
+            return quote;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -33,7 +36,15 @@ public class MessageApp {
                     e.printStackTrace();
                 }
         }
-        return "";
+        return quote;
+    }
+
+    public String selectRandomQuote(List<String> listQuote){
+
+        Random randomizer = new Random();
+        String random = listQuote.get(randomizer.nextInt(listQuote.size()));
+        return random;
+
     }
 }
 
