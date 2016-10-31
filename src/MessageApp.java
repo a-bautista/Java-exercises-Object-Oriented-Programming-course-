@@ -43,6 +43,7 @@ public class MessageApp {
 
         Random randomizer = new Random();
         String random = listQuote.get(randomizer.nextInt(listQuote.size()));
+        listQuote.remove(random);
         return random;
 
     }
